@@ -1,0 +1,16 @@
+student_id,course,teacher,teaching_quality,difficulty,satisfaction,hours_spent
+1,Data Science,John,4,5,3,12
+2,Data Science,John,5,4,4,10
+3,Data Science,John,3,5,2,14
+4,Math,Alex,5,3,5,8
+5,Math,Alex,4,3,4,7
+6,Math,Alex,5,2,5,6
+7,Physics,Mike,3,5,2,15
+8,Physics,Mike,2,5,2,16
+9,Physics,Mike,3,4,3,14
+10,Computer Networks,Sarah,4,3,4,9
+11,Computer Networks,Sarah,5,2,5,8
+12,Computer Networks,Sarah,4,3,4,9
+13,Operating Systems,David,3,5,3,13
+14,Operating Systems,David,4,4,3,12
+15,Operating Systems,David,3,5,2,14
