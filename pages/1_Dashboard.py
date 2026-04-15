@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import pickle
+import numpy as np
 
 # 🎨 STYLE
 st.markdown("""
@@ -59,6 +61,10 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 df = pd.read_csv("data/feedback.csv")
+
+with open("model.pkl", "rb") as f:
+    model = pickle.load(f)
+    
 
 # FILTERS
 course = st.sidebar.selectbox("Course", ["All"] + list(df["course"].unique()))
@@ -133,3 +139,27 @@ fig3 = px.box(
 )
 
 st.plotly_chart(fig3, use_container_width=True)
+
+st.markdown("## 🤖 Predict Student Satisfaction")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    difficulty = st.slider("Difficulty", 1.0, 5.0, 3.0)
+
+with col2:
+    hours = st.slider("Study Hours", 1.0, 10.0, 5.0)
+
+with col3:
+    teaching = st.slider("Teaching Quality", 1.0, 5.0, 3.0)
+
+if st.button("Predict Satisfaction"):
+    input_data = np.array([[difficulty, hours, teaching]])
+    prediction = model.predict(input_data)[0]
+
+    if prediction >= 4:
+        st.success(f"🔥 High Satisfaction Expected: {round(prediction,2)}")
+    elif prediction >= 3:
+        st.info(f"🙂 Moderate Satisfaction: {round(prediction,2)}")
+    else:
+        st.error(f"⚠ Low Satisfaction Risk: {round(prediction,2)}")
